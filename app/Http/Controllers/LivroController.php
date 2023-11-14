@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Livro;
 use App\Models\Bibliotecaria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class LivroController extends Controller
 {
@@ -17,6 +18,23 @@ class LivroController extends Controller
     public function show(Livro $livro)
     {
         return response()->json($livro);
+    }
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'titulo' => 'required|string',
+            'autor' => 'required|string',
+            'disponivel' => 'boolean',
+            // Adicione outras regras de validação conforme necessário
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 400);
+        }
+
+        $livro = Livro::create($request->all());
+
+        return response()->json($livro, 201);
     }
 
     // app/Http/Controllers/LivroController.php
