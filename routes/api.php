@@ -35,3 +35,12 @@ Route::get('/bibliotecarias/{bibliotecaria}', [BibliotecariaController::class, '
 Route::post('/bibliotecarias', [BibliotecariaController::class, 'store']);
 Route::put('/bibliotecarias/{bibliotecaria}', [BibliotecariaController::class, 'update']);
 Route::delete('/bibliotecarias/{bibliotecaria}', [BibliotecariaController::class, 'destroy']);
+
+
+use App\Http\Controllers\LoginController;
+
+Route::post('/login', [LoginController::class, 'login']);
+
+use App\Http\Controllers\RegisterController;
+
+Route::post('/register', [RegisterController::class, 'register']);
